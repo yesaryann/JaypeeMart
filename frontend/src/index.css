@@ -1,0 +1,174 @@
+:root {
+  /* Ultra Minimal B&W Color Palette */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fdfdfd;
+  --bg-tertiary: #f5f5f5;
+  
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --text-tertiary: #a0a0a0;
+  
+  --border-light: #ebebeb;
+  --border-dark: #111111;
+
+  --accent-black: #000000;
+  --accent-white: #ffffff;
+
+  --error: #cc0000;
+  --success: #008000;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Layout & Sizing - increased roundedness slightly and spacing */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-pill: 9999px;
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+
+  /* Shadows - softened extensively */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+button {
+  font-family: var(--font-family);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all 0.3s ease;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+input, textarea, select {
+  font-family: var(--font-family);
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+}
+
+/* Base Form Elements */
+.form-input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--text-primary);
+}
+
+/* Standard Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3) var(--spacing-6);
+  background-color: var(--accent-black);
+  color: var(--accent-white);
+  border-radius: 0; /* Sharp, minimal buttons */
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.btn:hover {
+  background-color: #333;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--accent-black);
+  border: 1px solid var(--border-light);
+}
+
+.btn-outline:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-dark);
+}
+
+/* Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Minimal Card Overrides */
+.card {
+  background-color: transparent;
+  border: none;
+  overflow: visible;
+}
+.card-image-wrapper {
+  background-color: var(--bg-tertiary);
+  overflow: hidden;
+  margin-bottom: var(--spacing-4);
+  border-radius: var(--radius-sm);
+}
+.card-image-wrapper img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card:hover .card-image-wrapper img {
+  transform: scale(1.05);
+}
+
+/* Page Form Card Overrides */
+.form-card {
+  border: 1px solid var(--border-light);
+  padding: var(--spacing-8);
+}

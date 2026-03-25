@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # 1. The Database Container
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017" # Allows you to use MongoDB Compass on your Windows machine to view the database
+    volumes:
+      - mongo-data:/data/db # Saves your data so it isn't deleted when the container stops
+    restart: unless-stopped
+
+  # 2. The Node.js Backend Container
+  backend:
+    build:
+      context: ./backend # Looks for the Dockerfile in the backend folder
+    ports:
+      - "5000:5000"
+    environment:
+      # This overrides the default 127.0.0.1 connection in your server.js
+      # "mongodb" here matches the service name above! Docker handles the networking.
+      - MONGO_URI=mongodb://mongodb:27017/campus-marketplace
+      - PORT=5000
+    depends_on:
+      - mongodb # Tell Docker to start the database before the backend
+    restart: unless-stopped
+
+  # 3. The React/Vite Frontend Container
+  frontend:
+    build:
+      context: ./frontend # Looks for the Dockerfile in the frontend folder
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+# This creates a persistent "virtual hard drive" for the database
+# Without this, all users/products would be wiped when the container stops!
+volumes:
+  mongo-data:
